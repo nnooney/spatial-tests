@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nicholas Nooney's Spatial Research</title>
+
+  <link rel="stylesheet" href="css/normalize.css">
+</head>
+<body>
+  <header>
+    <h1>Nicholas Nooney's Spatial Research</h1>
+  </header>
+
+  <section id="1">
+    <p>
+      Thank you for participating in my research project! This site will gather
+      information about your perceptions of spatial ability and your performance
+      on some spatial tasks. Before you submit your information, you will have
+      the opportunity to review it.
+    </p>
+    <p>
+      Please read all instructions carefully before proceeding. The entire
+      survey and tests will take approximately 30 minutes to complete. You will
+      be able to see your progress via a progress bar at the top of the survey.
+    </p>
+    <button>Begin</button>
+  </section>
+
+  <section id="2">
+    <h1>Create a unique ID</h1>
+    <p>
+      In order to be able to see your results, please create a participant ID. This
+      will be used to associate you with your data anonymously. If you have already
+      completed the survey, then enter your id by filling out each of the boxes to
+      see your results.
+    </p>
+    <form id="form-participantID">
+      <label>First letter of the city you were born in</label>
+      <input class="participantID" type="text" maxlength="1"></input>
+      <label>First letter of the month you were born</label>
+      <input class="participantID" type="text" maxlength="1"></input>
+      <label>First letter of your mother's first name</label>
+      <input class="participantID" type="text" maxlength="1"></input>
+      <label>First letter of your first pet's name (write 'X' if you never had a pet)</label>
+      <input class="participantID" type="text" maxlength="1"></input>
+      <label>First letter of the high school you graduated from / most recently attended</label>
+      <input class="participantID" type="text" maxlength="1"></input>
+      <input type="submit">Submit</input>
+    </form>
+  </section>
+
+  <section id="3">
+    <h1>Background Survey</h1>
+    <p>
+      One of the goals of this study is to understand the relationship between your
+      beliefs about your spatial skills and your performance on the tasks. Please
+      complete the following questions to obtain some background about your spatial
+      beliefs.
+    </p>
+    <form id="form-spatialBelief">
+      <label>How good are you with directions?</label>
+      <input type="range" min="1" max="5"></input>
+      <label>How many years have you lived at St. Olaf or commuted to St. Olaf?</label>
+      <input type="radio" name="yearsAtOlaf" value="0">0</input>
+      <input type="radio" name="yearsAtOlaf" value="1">1</input>
+      <input type="radio" name="yearsAtOlaf" value="2">2</input>
+      <input type="radio" name="yearsAtOlaf" value="3">3</input>
+      <input type="radio" name="yearsAtOlaf" value="4">4</input>
+      <input type="radio" name="yearsAtOlaf" value="5">5+</input>
+      <label>How many mathematics or physics courses have you taken in college?</label>
+      <input type="radio" name="spatialCourses" value="0">0</input>
+      <input type="radio" name="spatialCourses" value="1">1</input>
+      <input type="radio" name="spatialCourses" value="2">2</input>
+      <input type="radio" name="spatialCourses" value="3">3</input>
+      <input type="radio" name="spatialCourses" value="4">4</input>
+      <input type="radio" name="spatialCourses" value="5">5+</input>
+      <label>Which non-residential building do you spend the most time in?</label>
+      <select>
+        <option>Alumni Hall</option>
+        <option>Boe Memorial Chapel</option>
+        <option>Buntrock Commons</option>
+        <option>Christiansen Hall of Music</option>
+        <option>Dittman Center</option>
+        <option>Hall of Music</option>
+        <option>Holland Hall</option>
+        <option>Old Main</option>
+        <option>Regents Hall</option>
+        <option>Rolvaag Memorial Library</option>
+        <option>Skifter Hall</option>
+        <option>Skoglund/Tostrud</option>
+        <option>Theater Building</option>
+        <option>Tomson Hall</option>
+      </select>
+    </form>
+    <p>
+      This study also seeks to determine if there are any demographic
+      differences between spatial tasks. Please fill out the following
+      demographic information. If you do not want to answer any of the following
+      questions, please leave them blank.
+    </p>
+    <form id="form-demographic">
+      <label>What is your gender?</label>
+      <select>
+        <option>Female</option>
+        <option>Male</option>
+        <option>Custom</option>
+      </select>
+      <label>Are you a...</label>
+      <input type="checkbox" name="participantCategory" value="student">Student</input>
+      <input type="checkbox" name="participantCategory" value="faculty">Faculty</input>
+      <input type="checkbox" name="participantCategory" value="staff">Staff</input>
+      <input type="checkbox" name="participantCategory" value="alumni">Alumni</input>
+      <label>What is your race?</label>
+      <input type="checkbox" name="participantRace" value="white">White or Caucasian</input>
+      <input type="checkbox" name="participantRace" value="black">Black or African American</input>
+      <input type="checkbox" name="participantRace" value="indian">American Indian or Alaska Native</input>
+      <input type="checkbox" name="participantRace" value="asian">Asian</input>
+      <input type="checkbox" name="participantRace" value="islander">Native Hawaiian or Other Pacific Islander</input>
+      <input type="checkbox" name="participantRace" value="other">Other</input>
+    </form>
+  </section>
+
+  <section id="4">
+    <h1>Tasks</h1>
+    <p>
+      You will be tested on four different tasks which will measure separate
+      aspects of spatial ability. The four tests are:
+    </p>
+    <ol>
+      <li>Mental Rotation Task</li>
+      <li>Placing Buildings on a Map</li>
+      <li>Tracing Routes from Stories</li>
+      <li>Identifying Locations in Pictures</li>
+    </ol>
+  </section>
+  <footer>
+    Questions? Email <a href="mailto:nooney@stolaf.edu">nooney@stolaf.edu</a>.
+  </footer>
+</body>
+</html>
