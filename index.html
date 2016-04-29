@@ -23,7 +23,7 @@
       survey and tests will take approximately 30 minutes to complete. You will
       be able to see your progress via a progress bar at the top of the survey.
     </p>
-    <button>Begin</button>
+    <button id="btn-1" class="nextSection">Begin</button>
   </section>
 
   <section id="2">
@@ -45,8 +45,8 @@
       <input class="participantID" type="text" maxlength="1"></input>
       <label>First letter of the high school you graduated from / most recently attended</label>
       <input class="participantID" type="text" maxlength="1"></input>
-      <input type="submit">Submit</input>
     </form>
+    <button id="btn-2" class="nextSection">Submit</button>
   </section>
 
   <section id="3">
@@ -118,6 +118,7 @@
       <input type="checkbox" name="participantRace" value="islander">Native Hawaiian or Other Pacific Islander</input>
       <input type="checkbox" name="participantRace" value="other">Other</input>
     </form>
+    <button id="btn-3" class="nextSection">Continue</button>
   </section>
 
   <section id="4">
@@ -132,7 +133,176 @@
       <li>Tracing Routes from Stories</li>
       <li>Identifying Locations in Pictures</li>
     </ol>
+    <p>
+      Before each test, there will be an instruction screen that will give you
+      background information, including how to input your answers. When you have
+      read the instructions, continue to the next screen where you will complete
+      the test.
+    </p>
+    <button id="btn-4" class="nextSection">Continue</button>
   </section>
+
+  <section id="5">
+    <h1>Instructions for the Mental Rotation Task</h1>
+    <p>
+      In this test, you will be given two images, such as the ones shown below.
+      Your task is to determine whether or not the images are simply rotated, or
+      whether they are flipped and rotated.
+    </p>
+    <img>
+    <p>
+      If you believe that the images are Flipped, press F. If you believe that
+      the images are Just rotated, press J. In the example above, you would
+      press F, because the shapes are flipped to produce a mirror image.
+    </p>
+    <p>
+      There will be 30 trials. You will have the ability to view your results
+      at the end of the survey, after all tasks are complete.
+    </p>
+    <button id="btn-5" class="nextSection">Begin</button>
+  </section>
+
+  <section id="6">
+    <h1>Mental Roation Task</h1>
+    <img>
+    <p>
+      Press F is the image is flipped, J if it is just rotated.
+    </p>
+    <button id="btn-6" class="nextSection">Finish</button>
+  </section>
+
+  <section id="7">
+    <h1>Instructions for Placing Buildings on a Map</h1>
+    <p>
+      In this test, you will be presented with a blank map of campus that
+      includes only the roads. You will have a set of buildings to place on a
+      map. Your task is to determine where the buildings will go.
+    </p>
+    <img>
+    <p>
+      You can click and drag to move the pieces around. Press R to rotate the
+      image 45 degrees.
+    </p>
+    <p>
+      There will be 15 buildings to place on the map. You will have the ability
+      to view your results at the end of the survey, after all tasks are
+      complete.
+    </p>
+    <button id="btn-7" class="nextSection">Begin</button>
+  </section>
+
+  <section id="8">
+    <h1>Placing Buildings on a Map</h1>
+    <div>Map
+    </div>
+    <p>
+      Click and Drag to move buildings. Press R to rotate.
+    </p>
+    <button id="btn-8" class="nextSection">Finish</button>
+  </section>
+
+  <section id="9">
+    <h1>Instructions for Tracing Routes from Stories</h1>
+    <p>
+      In this test, you will read a short description of an Ole's day. Read the
+      story carefully, and try to visualize where the student went. Once you
+      finish reading the story, you will be presented with a complete map of
+      campus. Your task is to reconstruct the route that you read in the story.
+    </p>
+    <img>
+    <p>
+      To trace the route on the map, move the mouse to the start of the route,
+      then press the mouse button down and drag the mouse along the route that
+      the student took. If you have a stylus or touch screen, you can use those
+      instead of a mouse to trace the route.
+    </p>
+    <p>
+      There will be 5 stories to read and trace. You will have the ability to
+      view your results at the end of the survey, after all tasks are complete.
+    </p>
+    <button id="btn-9" class="nextSection">Begin</button>
+  </section>
+
+  <section id="10">
+    <h1>Tracing Routes from Stories</h1>
+    <div>Map
+    </div>
+    <button id="btn-10" class="nextSection">Finish</button>
+  </section>
+
+  <section id="11">
+    <h1>Instructions for Identifying Locations in Pictures</h1>
+    <p>
+      In this test, you will be given a picture of campus and a question similar
+      to the example below. Your task is to determine the best answer to the
+      question.
+    </p>
+    <img>
+    <p>
+      Answer each question by typing your response in the text input provided,
+      then press the button to continue to the next question.
+    </p>
+    <p>
+      There will be 10 pictures and question pairs. You will have the ability
+      to view your results at the end of the survey, after all tasks are
+      complete.
+    </p>
+    <button id="btn-11" class="nextSection">Begin</button>
+  </section>
+
+  <section id="12">
+    <h1>Identifying Locations in Pictures</h1>
+    <img>
+    <p class="question">
+    </p>
+    <button id="btn-12" class="nextSection">Finish</button>
+  </section>
+
+  <section id="13">
+    <h1>All Tasks Finished!</h1>
+    <p>
+      You have finished the four tasks! Thank you for completing them. Before
+      you view your results, please answer three questions about the tasks you
+      just completed.
+    </p>
+    <button id="btn-13" class="nextSection">Continue</button>
+  </section>
+
+  <section id="14">
+    <h1>Post-Test Survey</h1>
+    <p>
+      The following questions are designed to asses the tasks you completed and
+      reassess your belief about your spatial ability skills.
+    </p>
+    <form>
+      <label>Which task did you think was the easiest?</label>
+      <input type="radio" name="easyTask" value="mrt">Mental Rotation Task</input>
+      <input type="radio" name="easyTask" value="map">Placing Buildings on a Map</input>
+      <input type="radio" name="easyTask" value="story">Tracing Routes from Stories</input>
+      <input type="radio" name="easyTask" value="pic">Identifying Locations in Pictures</input>
+      <label>Which task did you think was the hardest?</label>
+      <input type="radio" name="hardTask" value="mrt">Mental Rotation Task</input>
+      <input type="radio" name="hardTask" value="map">Placing Buildings on a Map</input>
+      <input type="radio" name="hardTask" value="story">Tracing Routes from Stories</input>
+      <input type="radio" name="hardTask" value="pic">Identifying Locations in Pictures</input>
+      <label>My spatial skills are...</label>
+      <input type="radio" name="postBelief" value="+">Better than I originally thought</input>
+      <input type="radio" name="postBelief" value="-">Worse than I originally thought</input>
+      <input type="radio" name="postBelief" value="0">The same as I originally thought</input>
+    </form>
+    <p>
+      Thank you for participating in this study! Please click the button below
+      to submit your results and view them on the next page.
+    </p>
+    <button id="btn-14" class="nextSection">Send and View Results</button>
+  </section>
+
+  <section id="15">
+    <h1>View Your Results</h1>
+
+    <button id="btn-15" class="nextSection">Start Over</button>
+  </section>
+
   <footer>
     Questions? Email <a href="mailto:nooney@stolaf.edu">nooney@stolaf.edu</a>.
   </footer>
