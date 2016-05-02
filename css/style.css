@@ -1,0 +1,61 @@
+body {
+  box-sizing: border-box;
+}
+
+header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  display: none;
+}
+
+section.active {
+  background-color: #eee;
+  padding: 2em;
+
+  height: 70vh;
+  width: 60vw;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+section > p {
+  background-color: #ddd;
+  padding: 1em;
+}
+
+input {
+  display: block;
+  margin-bottom: 1em;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  display: inline-block;
+  margin-bottom: 1em;
+}
+
+label {
+  display: block;
+  margin-top: 1em;
+}
+
+button {
+  width: 20vw;
+  margin: 0 auto;
+  height: 5vh;
+}
+
+footer {
+  height: 10vh;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
