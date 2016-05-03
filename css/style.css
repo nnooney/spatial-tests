@@ -3,28 +3,42 @@ body {
 }
 
 header {
-  height: 10vh;
+  height: 12vh;
+  padding: 1em;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+header > h1 {
+  width: 60vw;
+  min-width: 10em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+header > h4 {
+  width: 60vw;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 0.25em;
 }
 
 section {
   display: none;
+  overflow-y: scroll;
 }
 
 section.active {
   background-color: #eee;
   padding: 2em;
+  overflow-y: scroll;
 
   height: 70vh;
   width: 60vw;
   margin: 0 auto;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: stretch;
+  display: block;
 }
 
 section > p {
@@ -32,30 +46,69 @@ section > p {
   padding: 1em;
 }
 
+form {
+  border: 1px solid #ddd;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
 input {
-  display: block;
+  display: inline-block;
   margin-bottom: 1em;
 }
 
 input[type="radio"], input[type="checkbox"] {
   display: inline-block;
-  margin-bottom: 1em;
+  margin-bottom: 0;
+  margin-left: 0.5em;
 }
 
 label {
   display: block;
   margin-top: 1em;
+  margin-bottom: .2em;
 }
 
 button {
+  display: block;
   width: 20vw;
   margin: 0 auto;
-  height: 5vh;
+  height: 5vw;
+  min-height: 2.5em;
 }
 
 footer {
-  height: 10vh;
+  height: 5vh;
   display: flex;
   align-items: baseline;
   justify-content: center;
+}
+
+ol {
+  margin: 2em auto;
+}
+
+.participantID {
+  width: 3em;
+  padding: 0.2em;
+}
+
+.answerText {
+  margin-left: 0.5em;
+}
+
+div.ans {
+  display: block;
+  margin-bottom: .25em;
+}
+
+span.ans {
+  display: inline-block;
+  margin-left: .25em;
+}
+
+#btn-2-msg {
+  width: 30vw;
+  margin: 0 auto;
+  margin-bottom: 1em;
 }

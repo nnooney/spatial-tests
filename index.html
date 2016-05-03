@@ -8,13 +8,16 @@
   <link rel="stylesheet" href="css/style.css">
 
   <script src="js/tabs.js"></script>
+  <script src="js/buttons.js"></script>
+  <script src="js/rangeText.js"></script>
 </head>
 <body>
   <header>
     <h1>Nicholas Nooney's Spatial Research</h1>
+    <h4 id="userID"></h4>
   </header>
 
-  <section id="1">
+  <section id="1" class="active">
     <p>
       Thank you for participating in my research project! This site will gather
       information about your perceptions of spatial ability and your performance
@@ -25,6 +28,13 @@
       Please read all instructions carefully before proceeding. The entire
       survey and tests will take approximately 30 minutes to complete. You will
       be able to see your progress via a progress bar at the top of the survey.
+    </p>
+    <p>
+      There will be no emotional or psychological harms introduced to you, nor
+      will you be asked to divulge any potentially upsetting information. All of
+      the data that you submit will be anonymous and I will not be able to trace
+      individual results back to you. By clicking the Begin button below, you
+      consent to participate in this study.
     </p>
     <button id="btn-1" class="nextSection">Begin</button>
   </section>
@@ -49,7 +59,10 @@
       <label>First letter of the high school you graduated from / most recently attended</label>
       <input class="participantID" type="text" maxlength="1"></input>
     </form>
-    <button id="btn-2" class="nextSection">Submit</button>
+    <p id="btn-2-msg">
+      Please fill in all fields before submitting
+    </p>
+    <button id="btn-2" class="nextSection" disabled>Submit</button>
   </section>
 
   <section id="3">
@@ -62,21 +75,14 @@
     </p>
     <form id="form-spatialBelief">
       <label>How good are you with directions?</label>
-      <input type="range" min="1" max="5"></input>
+      <input id="dirRange" type="range" min="1" max="5" value="3"></input>
+      <span id="dirText" class="answerText">average</span>
       <label>How many years have you lived at St. Olaf or commuted to St. Olaf?</label>
-      <input type="radio" name="yearsAtOlaf" value="0">0</input>
-      <input type="radio" name="yearsAtOlaf" value="1">1</input>
-      <input type="radio" name="yearsAtOlaf" value="2">2</input>
-      <input type="radio" name="yearsAtOlaf" value="3">3</input>
-      <input type="radio" name="yearsAtOlaf" value="4">4</input>
-      <input type="radio" name="yearsAtOlaf" value="5">5+</input>
+      <input id="yearRange" type="range" min="0" max="5" value="0"></input>
+      <span id="yearText" class="answerText">0</span>
       <label>How many mathematics or physics courses have you taken in college?</label>
-      <input type="radio" name="spatialCourses" value="0">0</input>
-      <input type="radio" name="spatialCourses" value="1">1</input>
-      <input type="radio" name="spatialCourses" value="2">2</input>
-      <input type="radio" name="spatialCourses" value="3">3</input>
-      <input type="radio" name="spatialCourses" value="4">4</input>
-      <input type="radio" name="spatialCourses" value="5">5+</input>
+      <input id="courseRange" type="range" min="0" max="5" value="0"></input>
+      <span id="courseText" class="answerText">0</span>
       <label>Which non-residential building do you spend the most time in?</label>
       <select>
         <option>Alumni Hall</option>
@@ -109,17 +115,57 @@
         <option>Custom</option>
       </select>
       <label>Are you a...</label>
-      <input type="checkbox" name="participantCategory" value="student">Student</input>
-      <input type="checkbox" name="participantCategory" value="faculty">Faculty</input>
-      <input type="checkbox" name="participantCategory" value="staff">Staff</input>
-      <input type="checkbox" name="participantCategory" value="alumni">Alumni</input>
+      <div class="ans">
+        <input type="checkbox" name="participantCategory" value="student">
+          <span class="ans">Student</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantCategory" value="faculty">
+          <span class="ans">Faculty</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantCategory" value="staff">
+          <span class="ans">Staff</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantCategory" value="alumni">
+          <span class="ans">Alumni</span>
+        </input>
+      </div>
       <label>What is your race?</label>
-      <input type="checkbox" name="participantRace" value="white">White or Caucasian</input>
-      <input type="checkbox" name="participantRace" value="black">Black or African American</input>
-      <input type="checkbox" name="participantRace" value="indian">American Indian or Alaska Native</input>
-      <input type="checkbox" name="participantRace" value="asian">Asian</input>
-      <input type="checkbox" name="participantRace" value="islander">Native Hawaiian or Other Pacific Islander</input>
-      <input type="checkbox" name="participantRace" value="other">Other</input>
+      <div class="ans">
+        <input type="checkbox" name="participantRace" value="white">
+          <span class="ans">White or Caucasian</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantRace" value="black">
+          <span class="ans">Black or African American</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantRace" value="indian">
+          <span class="ans">American Indian or Alaska Native</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantRace" value="asian">
+          <span class="ans">Asian</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantRace" value="islander">
+          <span class="ans">Native Hawaiian or Other Pacific Islander</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="checkbox" name="participantRace" value="other">
+          <span class="ans">Other</span>
+        </input>
+      </div>
     </form>
     <button id="btn-3" class="nextSection">Continue</button>
   </section>
@@ -279,19 +325,63 @@
     </p>
     <form>
       <label>Which task did you think was the easiest?</label>
-      <input type="radio" name="easyTask" value="mrt">Mental Rotation Task</input>
-      <input type="radio" name="easyTask" value="map">Placing Buildings on a Map</input>
-      <input type="radio" name="easyTask" value="story">Tracing Routes from Stories</input>
-      <input type="radio" name="easyTask" value="pic">Identifying Locations in Pictures</input>
+      <div class="ans">
+        <input type="radio" name="easyTask" value="mrt">
+          <span class="ans">Mental Rotation Task</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="easyTask" value="map">
+          <span class="ans">Placing Buildings on a Map</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="easyTask" value="story">
+          <span class="ans">Tracing Routes from Stories</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="easyTask" value="pic">
+          <span class="ans">Identifying Locations in Pictures</span>
+        </input>
+      </div>
       <label>Which task did you think was the hardest?</label>
-      <input type="radio" name="hardTask" value="mrt">Mental Rotation Task</input>
-      <input type="radio" name="hardTask" value="map">Placing Buildings on a Map</input>
-      <input type="radio" name="hardTask" value="story">Tracing Routes from Stories</input>
-      <input type="radio" name="hardTask" value="pic">Identifying Locations in Pictures</input>
+      <div class="ans">
+        <input type="radio" name="hardTask" value="mrt">
+          <span class="ans">Mental Rotation Task</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="hardTask" value="map">
+          <span class="ans">Placing Buildings on a Map</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="hardTask" value="story">
+          <span class="ans">Tracing Routes from Stories</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="hardTask" value="pic">
+          <span class="ans">Identifying Locations in Pictures</span>
+        </input>
+      </div>
       <label>My spatial skills are...</label>
-      <input type="radio" name="postBelief" value="+">Better than I originally thought</input>
-      <input type="radio" name="postBelief" value="-">Worse than I originally thought</input>
-      <input type="radio" name="postBelief" value="0">The same as I originally thought</input>
+      <div class="ans">
+        <input type="radio" name="postBelief" value="+">
+          <span class="ans">Better than I originally thought</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="postBelief" value="-">
+          <span class="ans">Worse than I originally thought</span>
+        </input>
+      </div>
+      <div class="ans">
+        <input type="radio" name="postBelief" value="0">
+          <span class="ans">The same as I originally thought</span>
+        </input>
+      </div>
     </form>
     <p>
       Thank you for participating in this study! Please click the button below
