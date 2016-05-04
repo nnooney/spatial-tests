@@ -38,18 +38,19 @@ ABCDE.pre.role.<type> = T/F
 ABCDE.pre.race.<type> = T/F
 
 ABCDE.mrt.completed = T/F
+ABCDE.mrt.order = The order the trials were shown
 ABCDE.mrt.#.guess = F/J
 ABCDE.mrt.#.actual = F/J
 ABCDR.mrt.#.time = Time to Answer
 
 ABCDE.bldg.completed = T/F
-ABCDE.bldg.#.guess.rot = 1..8
+ABCDE.bldg.order = The order the trials were shown
+ABCDE.bldg.#.guess.rot = 0..7 (Actual is always 0)
 ABCDE.bldg.#.guess.x = #
 ABCDE.bldg.#.guess.y = #
-ABCDE.bldg.#.actual.rot = 1..8
 ABCDE.bldg.#.actual.x = #
 ABCDE.bldg.#.actual.y = #
-ABCDE.bldg.time = Time to Complete Task
+ABCDE.bldg.#.time = Time to Complete Task
 
 ABCDE.stry.completed = T/F
 ABCDE.stry.#.guess.path = <PATH>

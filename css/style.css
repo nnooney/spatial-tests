@@ -124,3 +124,11 @@ span.ans {
 .image {
   width: 100%;
 }
+
+#currentBuilding {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transition: transform 1s;
+}

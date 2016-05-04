@@ -119,6 +119,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
       trialArray.push(i);
     }
     shuffle(trialArray);
+    localStorage[pid + '.mrt.order'] = trialArray.join();
+
 
     function showTrial() {
       mrtImage.setAttribute('src', MRT_DATA[trialArray[0]-1].imgPath);
@@ -164,6 +166,76 @@ document.addEventListener('DOMContentLoaded', function(e) {
   btn6.addEventListener('click', function(e) {
     localStorage[pid + '.mrt.completed'] = 'T';
   });
+
+  // Button 7 (Start of Building Task) should add a listener for mousemove
+  var btn7 = document.querySelector('#btn-7');
+  btn7.addEventListener('click', function(e) {
+    document.body.addEventListener('mousemove', moveBuilding);
+    document.body.addEventListener('keydown', rotateBuilding);
+    localStorage[pid + '.bldg.order'] = bldgArray.join();
+    showBuilding();
+  });
+
+  // Build the random order of trials that will be seen
+  var bldgArray = [];
+  for (var i=1; i<=15; i++) {
+    bldgArray.push(i);
+  }
+  shuffle(bldgArray);
+
+  // The function that chooses the next building to show
+  var bldgStartTime;
+  var bldgRot, bldgX, bldgY;
+  function showBuilding() {
+    currentBuilding.setAttribute('src', BLDG_DATA[bldgArray[0]-1].imgPath);
+    bldgStartTime = Date.now();
+    bldgRot = Math.floor(Math.random() * 8) * 45;
+    drawBuilding();
+  }
+
+  // The function that repositions the image of the building based upon the
+  // mouse movement
+  var currentBuilding = document.querySelector('#currentBuilding');
+  function drawBuilding(e) {
+
+    // Calculate the scaled ratio for the buildings
+    var imgStyle = window.getComputedStyle(currentBuilding);
+    var style = window.getComputedStyle(bldgMap);
+    var ratio = parseInt(style.width) / 700; // 700 is the width of the regular image
+    console.log(bldgRot);
+    // Reposition the current building image
+    currentBuilding.style.transform = 'scale(' + ratio + ') rotate(' + bldgRot + 'deg)';
+    currentBuilding.style.left = (bldgX - parseInt(imgStyle.width)) + 'px';
+    currentBuilding.style.top = (bldgY - parseInt(imgStyle.height)) + 'px';
+  }
+
+  function moveBuilding(e) {
+    bldgX = e.clientX;
+    bldgY = e.clientY;
+    drawBuilding();
+  }
+
+  function rotateBuilding(e) {
+    if (e.keyCode == 82) {
+      bldgRot = (bldgRot + 45) % 360;
+      drawBuilding();
+    }
+  }
+
+  // Add an event listener to the map for the buildings
+  var bldgMap = document.querySelector('#bldgMap');
+  bldgMap.addEventListener('mousedown', function(e) {
+    // Offset X and Y are the coordinates of the mouse click in the image
+    console.log('placed!', e.offsetX, e.offsetY);
+  });
+
+  // Button 8 (Building Task) should be disabled until the test is over.
+  var btn8 = document.querySelector('#btn-8');
+  btn8.addEventListener('click', function(e) {
+    document.body.removeEventListener('mousemove', moveBuilding);
+    document.body.removeEventListener('keydown', rotateBuilding);
+    localStorage[pid + '.bldg.completed'] = 'T';
+  })
 
   // Button 15 (Start Over) should clear the participant ID in the header
   var btn15 = document.querySelector('#btn-15');

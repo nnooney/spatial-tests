@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="css/style.css">
 
   <script src="data/mrt.js"></script>
+  <script src="data/bldg.js"></script>
+  <script src="data/stry.js"></script>
+  <script src="data/img.js"></script>
 
   <script src="js/tabs.js"></script>
   <script src="js/buttons.js"></script>
@@ -235,11 +238,11 @@
       map. Your task is to determine where the buildings will go.
     </p>
     <div class="imageContainer">
-      <img>
+      <img class="image" src="img/bldg/fullmap.png">
     </div>
     <p>
-      You can click and drag to move the pieces around. Press R to rotate the
-      image 45 degrees.
+      Buildings will be presented one at a time. Click to place the building on
+      the map. Press R to rotate the building 45 degrees.
     </p>
     <p>
       There will be 15 buildings to place on the map. You will have the ability
@@ -251,12 +254,17 @@
 
   <section id="8">
     <h1>Placing Buildings on a Map</h1>
-    <div>Map
+    <div id="bldgContainer">
+      <img id="currentBuilding" src="img/bldg/tomson.png">
+      <div class="imageContainer">
+        <img id="bldgMap" class="image" src="img/bldg/blankmap.png">
+      </div>
+      <p id="bldgName"></p>
     </div>
     <p>
-      Click and Drag to move buildings. Press R to rotate.
+      Click on the map to place buildings. Press R to rotate.
     </p>
-    <button id="btn-8" class="nextSection">Finish</button>
+    <button id="btn-8" class="nextSection" disabled>Finish</button>
   </section>
 
   <section id="9">
