@@ -27,4 +27,12 @@ document.addEventListener('DOMContentLoaded', function(e) {
     }
     dirText.innerHTML = text;
   });
+
+  yearRange.addEventListener('input', function(e) {
+    yearText.innerHTML = yearRange.value + (yearRange.value == 5 ? " or more" : "");
+  });
+
+  courseRange.addEventListener('input', function(e) {
+    courseText.innerHTML = courseRange.value + (courseRange.value == 5 ? " or more" : "");
+  });
 });

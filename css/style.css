@@ -77,6 +77,10 @@ button {
   min-height: 2.5em;
 }
 
+.testBeginButton {
+  margin: 175px auto;
+}
+
 footer {
   height: 5vh;
   display: flex;
@@ -111,4 +115,12 @@ span.ans {
   width: 30vw;
   margin: 0 auto;
   margin-bottom: 1em;
+}
+
+.imageContainer {
+  margin: 1em;
+}
+
+.image {
+  width: 100%;
 }

@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 
+  <script src="data/mrt.js"></script>
+
   <script src="js/tabs.js"></script>
   <script src="js/buttons.js"></script>
   <script src="js/rangeText.js"></script>
@@ -84,7 +86,7 @@
       <input id="courseRange" type="range" min="0" max="5" value="0"></input>
       <span id="courseText" class="answerText">0</span>
       <label>Which non-residential building do you spend the most time in?</label>
-      <select>
+      <select id="bldgSelect">
         <option>Alumni Hall</option>
         <option>Boe Memorial Chapel</option>
         <option>Buntrock Commons</option>
@@ -109,10 +111,10 @@
     </p>
     <form id="form-demographic">
       <label>What is your gender?</label>
-      <select>
+      <select id="genderSelect">
         <option>Female</option>
         <option>Male</option>
-        <option>Custom</option>
+        <option>Other</option>
       </select>
       <label>Are you a...</label>
       <div class="ans">
@@ -198,11 +200,13 @@
       Your task is to determine whether or not the images are simply rotated, or
       whether they are flipped and rotated.
     </p>
-    <img>
+    <div class="imageContainer">
+      <img class="image" src="img/mrt/example.jpg">
+    </div>
     <p>
       If you believe that the images are Flipped, press F. If you believe that
       the images are Just rotated, press J. In the example above, you would
-      press F, because the shapes are flipped to produce a mirror image.
+      press J, because the shapes are just rotations of one another.
     </p>
     <p>
       There will be 30 trials. You will have the ability to view your results
@@ -213,11 +217,14 @@
 
   <section id="6">
     <h1>Mental Roation Task</h1>
-    <img>
+    <div class="imageContainer">
+      <button id="mrtBegin" class="testBeginButton">Begin</button>
+      <img id="mrtImage" class="image">
+    </div>
     <p>
       Press F is the image is flipped, J if it is just rotated.
     </p>
-    <button id="btn-6" class="nextSection">Finish</button>
+    <button id="btn-6" class="nextSection" disabled>Finish</button>
   </section>
 
   <section id="7">
@@ -227,7 +234,9 @@
       includes only the roads. You will have a set of buildings to place on a
       map. Your task is to determine where the buildings will go.
     </p>
-    <img>
+    <div class="imageContainer">
+      <img>
+    </div>
     <p>
       You can click and drag to move the pieces around. Press R to rotate the
       image 45 degrees.
@@ -258,7 +267,9 @@
       finish reading the story, you will be presented with a complete map of
       campus. Your task is to reconstruct the route that you read in the story.
     </p>
-    <img>
+    <div class="imageContainer">
+      <img>
+    </div>
     <p>
       To trace the route on the map, move the mouse to the start of the route,
       then press the mouse button down and drag the mouse along the route that
@@ -286,7 +297,9 @@
       to the example below. Your task is to determine the best answer to the
       question.
     </p>
-    <img>
+    <div class="imageContainer">
+      <img>
+    </div>
     <p>
       Answer each question by typing your response in the text input provided,
       then press the button to continue to the next question.
