@@ -186,7 +186,9 @@ document.addEventListener('DOMContentLoaded', function(e) {
   // The function that chooses the next building to show
   var bldgStartTime;
   var bldgRot, bldgX, bldgY;
+  var ratio;
   function showBuilding() {
+    bldgName.innerHTML = BLDG_DATA[bldgArray[0]-1].name;
     currentBuilding.setAttribute('src', BLDG_DATA[bldgArray[0]-1].imgPath);
     bldgStartTime = Date.now();
     bldgRot = Math.floor(Math.random() * 8) * 45;
@@ -195,45 +197,84 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
   // The function that repositions the image of the building based upon the
   // mouse movement
+  var bldgName = document.querySelector('#bldgName');
   var currentBuilding = document.querySelector('#currentBuilding');
-  function drawBuilding(e) {
+  function drawBuilding() {
 
     // Calculate the scaled ratio for the buildings
     var imgStyle = window.getComputedStyle(currentBuilding);
     var style = window.getComputedStyle(bldgMap);
-    var ratio = parseInt(style.width) / 700; // 700 is the width of the regular image
-    console.log(bldgRot);
+    ratio = parseInt(style.width) / 700; // 700 is the width of the regular image
+
     // Reposition the current building image
     currentBuilding.style.transform = 'scale(' + ratio + ') rotate(' + bldgRot + 'deg)';
-    currentBuilding.style.left = (bldgX - parseInt(imgStyle.width)) + 'px';
-    currentBuilding.style.top = (bldgY - parseInt(imgStyle.height)) + 'px';
+    currentBuilding.style.left = (bldgX - parseInt(imgStyle.width)*ratio) + 'px';
+    currentBuilding.style.top = (bldgY - parseInt(imgStyle.height)*ratio) + 'px';
   }
 
   function moveBuilding(e) {
-    bldgX = e.clientX;
-    bldgY = e.clientY;
+    var boundingRect = bldgContainer.getBoundingClientRect();
+    bldgX = e.pageX - boundingRect.left;
+    bldgY = e.pageY - boundingRect.top;
     drawBuilding();
   }
 
   function rotateBuilding(e) {
     if (e.keyCode == 82) {
-      bldgRot = (bldgRot + 45) % 360;
+      bldgRot = (bldgRot + 45) % 10800;
       drawBuilding();
+    }
+  }
+
+  // Function to record to local storage the data
+  function recordBldg(guessX, guessY) {
+    var time = Date.now() - bldgStartTime;
+    var trialNum = bldgArray.shift();
+
+    localStorage[pid + '.bldg.' + trialNum + '.guess.rot'] = Math.floor(bldgRot/45) % 8;
+    localStorage[pid + '.bldg.' + trialNum + '.guess.x'] = guessX;
+    localStorage[pid + '.bldg.' + trialNum + '.guess.y'] = guessY;
+
+    localStorage[pid + '.bldg.' + trialNum + '.actual.x'] = Math.floor(BLDG_DATA[trialNum-1].locX * ratio);
+    localStorage[pid + '.bldg.' + trialNum + '.actual.y'] = Math.floor(BLDG_DATA[trialNum-1].locY * ratio);
+
+    localStorage[pid + '.bldg.' + trialNum + '.time'] = time;
+
+    if (bldgArray.length == 0) {
+      document.body.removeEventListener('mousemove', moveBuilding);
+      document.body.removeEventListener('keydown', rotateBuilding);
+      btn8.removeAttribute('disabled');
+      currentBuilding.style.display = 'none';
+      bldgName.innerHTML = 'Finished!';
+    } else {
+      showBuilding();
     }
   }
 
   // Add an event listener to the map for the buildings
   var bldgMap = document.querySelector('#bldgMap');
-  bldgMap.addEventListener('mousedown', function(e) {
-    // Offset X and Y are the coordinates of the mouse click in the image
-    console.log('placed!', e.offsetX, e.offsetY);
-  });
+  var bldgContainer = document.querySelector('#bldgContainer');
+  bldgContainer.addEventListener('mousedown', placeBuilding);
+
+  function placeBuilding(e) {
+    var boundingRect = bldgContainer.getBoundingClientRect();
+    var placedImg = document.createElement('img');
+    placedImg.src = currentBuilding.src;
+    placedImg.style.position = 'absolute';
+    placedImg.style.top = currentBuilding.style.top;
+    placedImg.style.left = currentBuilding.style.left;
+    placedImg.style.transform = currentBuilding.style.transform;
+    placedImg.style.transformOrigin = 'left top';
+    placedImg.classList.add('placedBldg');
+
+    bldgContainer.insertBefore(placedImg, bldgName);
+
+    recordBldg(e.offsetX, e.offsetY);
+  };
 
   // Button 8 (Building Task) should be disabled until the test is over.
   var btn8 = document.querySelector('#btn-8');
   btn8.addEventListener('click', function(e) {
-    document.body.removeEventListener('mousemove', moveBuilding);
-    document.body.removeEventListener('keydown', rotateBuilding);
     localStorage[pid + '.bldg.completed'] = 'T';
   })
 

@@ -119,6 +119,7 @@ span.ans {
 
 .imageContainer {
   margin: 1em;
+  text-align: center;
 }
 
 .image {
@@ -130,5 +131,38 @@ span.ans {
   top: 0;
   left: 0;
 
-  transition: transform 1s;
+  transition: transform 0.1s;
+  transform-origin: left top;
+  z-index: 3;
+}
+
+#bldgName {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bolder;
+  background-color: #ff0;
+}
+
+#bldgMap {
+  max-width: 78vh;
+  max-height: 60vh;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  /*cursor: none;*/
+  z-index: 5;
+}
+
+#bldgImgContainer {
+  z-index: 5;
+}
+
+.placedBldg {
+  /*cursor: none;*/
+  z-index: 2;
+}
+
+#bldgContainer {
+  position: relative;
 }
