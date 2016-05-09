@@ -276,13 +276,19 @@
       campus. Your task is to reconstruct the route that you read in the story.
     </p>
     <div class="imageContainer">
-      <img>
+      <img class="image" src="img/stry/example.png">
     </div>
     <p>
       To trace the route on the map, move the mouse to the start of the route,
-      then press the mouse button down and drag the mouse along the route that
-      the student took. If you have a stylus or touch screen, you can use those
-      instead of a mouse to trace the route.
+      then click the mouse button to create a marker. Then move the mouse to the
+      next location in the story and click to create another marker. A line will
+      indicate that the two markers are connected in the route.
+    </p>
+    <p>
+      For example, if the story was "I woke up in Mohn, then went to Buntrock
+      for breakfase, then went to Regents for class", then you would first click
+      on Mohn, then on Buntrock, then on Regents (as detailed in the picture
+      above). 
     </p>
     <p>
       There will be 5 stories to read and trace. You will have the ability to
@@ -293,9 +299,26 @@
 
   <section id="10">
     <h1>Tracing Routes from Stories</h1>
-    <div>Map
+    <div id="storyScreen">
+      <p id="storyText"></p>
+      <button id="beginTrace">Trace Route</button>
+      <p>
+        Read the story and then click Trace Route to begin tracing.
+      </p>
     </div>
-    <button id="btn-10" class="nextSection">Finish</button>
+    <div id="mapScreen">
+      <div id="mapContainer">
+        <img id="stryMap" class="image" src="img/bldg/fullmap.png">
+        <canvas id="stryCanvas"></canvas>
+      </div>
+      <button id="clearCanvas">Clear Route</button>
+      <button id="stryButton">Next Story</button>
+      <p>
+        Click on the map to make a marker, then click at another location to
+        make the route. Click clear to start over.
+      </p>
+    </div>
+    <button id="btn-10" class="nextSection" disabled>Finish</button>
   </section>
 
   <section id="11">

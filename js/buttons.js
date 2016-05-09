@@ -278,6 +278,22 @@ document.addEventListener('DOMContentLoaded', function(e) {
     localStorage[pid + '.bldg.completed'] = 'T';
   })
 
+  // Button 9 (Story Info) should begin the story collection process
+
+  var storyScreen = document.querySelector('#storyScreen');
+  var mapScreen = document.querySelector('#mapScreen');
+  var traceBtn = document.querySelector('#beginTrace');
+  traceBtn.addEventListener('click', function(e) {
+    mapScreen.style.display = 'block';
+    storyScreen.style.display = 'none';
+  })
+
+  // Button 10 (Story Task) should be disabled until the test is over.
+  var btn10 = document.querySelector('#btn-10');
+  btn10.addEventListener('click', function(e) {
+    localStorage[pid + '.stry.completed'] = 'T';
+  })
+
   // Button 15 (Start Over) should clear the participant ID in the header
   var btn15 = document.querySelector('#btn-15');
   btn15.addEventListener('click', function(e) {
