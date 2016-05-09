@@ -41,7 +41,7 @@ section.active {
   display: block;
 }
 
-section > p {
+section p {
   background-color: #ddd;
   padding: 1em;
 }
@@ -90,6 +90,15 @@ footer {
 
 ol {
   margin: 2em auto;
+}
+
+button.ib {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
 }
 
 .participantID {
@@ -162,7 +171,6 @@ span.ans {
   cursor: none;
   z-index: 2;
 }
-
 #bldgContainer {
   position: relative;
 }
@@ -192,4 +200,6 @@ span.ans {
   width: 100%;
   height: 100%;
   margin: 0 auto;
+
+  z-index: 5;
 }

@@ -279,14 +279,102 @@ document.addEventListener('DOMContentLoaded', function(e) {
   })
 
   // Button 9 (Story Info) should begin the story collection process
+  var btn9 = document.querySelector('#btn-9');
+  btn9.addEventListener('click', function(e) {
 
-  var storyScreen = document.querySelector('#storyScreen');
-  var mapScreen = document.querySelector('#mapScreen');
-  var traceBtn = document.querySelector('#beginTrace');
-  traceBtn.addEventListener('click', function(e) {
-    mapScreen.style.display = 'block';
-    storyScreen.style.display = 'none';
-  })
+    var stryArray = [];
+    for (var i=1; i<=5; i++) {
+      stryArray.push(i);
+    }
+    shuffle(stryArray);
+
+    var storyScreen = document.querySelector('#storyScreen');
+    var mapScreen = document.querySelector('#mapScreen');
+    var traceBtn = document.querySelector('#beginTrace');
+    var clearBtn = document.querySelector('#clearCanvas');
+    var nextBtn = document.querySelector('#stryButton');
+    var storyText = document.querySelector('#storyText');
+    var stryMap = document.querySelector('#stryMap');
+    var stryCanvas = document.querySelector('#stryCanvas');
+    var context = stryCanvas.getContext('2d');
+
+    var readTime, drawTime;
+    var tracePath = [];
+    var renderID;
+
+    function showStory() {
+      mapScreen.style.display = 'none';
+      storyScreen.style.display = 'block';
+      storyText.innerHTML = STORY_DATA[stryArray[0]-1].story;
+      readTime = Date.now();
+    }
+
+    function recordStory() {
+      var time = Date.now() - drawTime;
+      cancelAnimationFrame(renderID);
+      var trialNum = stryArray.shift();
+
+      localStorage[pid + '.stry.' + trialNum + '.guess.path'] = tracePath;
+      localStorage[pid + '.stry.' + trialNum + '.actual.path'] = STORY_DATA[trialNum-1].path;
+      localStorage[pid + '.stry.' + trialNum + '.drawTime'] = time;
+
+      tracePath = [];
+
+      if (stryArray.length == 0) {
+        mapScreen.style.display = 'none';
+        btn10.removeAttribute('disabled');
+      } else {
+        showStory();
+      }
+    }
+
+    function render() {
+      context.clearRect(0, 0, 9999, 9999);
+
+      for (var i=0; i<tracePath.length; i++) {
+        context.beginPath();
+        context.fillStyle = 'red';
+        context.arc(tracePath[i][0], tracePath[i][1], 5, 0, 2 * Math.PI, false);
+        context.fill();
+
+        if (i != 0) {
+          context.beginPath();
+          context.moveTo(tracePath[i-1][0], tracePath[i-1][1]);
+          context.lineTo(tracePath[i][0], tracePath[i][1]);
+          context.strokeStyle = 'blue';
+          context.stroke();
+        }
+      }
+
+      renderID = requestAnimationFrame(render);
+    }
+
+    traceBtn.addEventListener('click', function(e) {
+      mapScreen.style.display = 'block';
+      storyScreen.style.display = 'none';
+
+      var time = Date.now() - readTime;
+      localStorage[pid + '.stry.' + stryArray[0] + '.readTime'] = time;
+
+      stryCanvas.width = stryMap.offsetWidth;
+      stryCanvas.height = stryMap.offsetHeight;
+
+      renderID = requestAnimationFrame(render);
+      drawTime = Date.now();
+    });
+
+    clearBtn.addEventListener('click', function(e) {
+      tracePath = [];
+    });
+
+    nextBtn.addEventListener('click', recordStory);
+
+    stryCanvas.addEventListener('click', function(e) {
+      tracePath.push([e.offsetX, e.offsetY]);
+    });
+
+    showStory();
+  });
 
   // Button 10 (Story Task) should be disabled until the test is over.
   var btn10 = document.querySelector('#btn-10');
