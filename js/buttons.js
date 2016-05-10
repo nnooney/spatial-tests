@@ -380,7 +380,91 @@ document.addEventListener('DOMContentLoaded', function(e) {
   var btn10 = document.querySelector('#btn-10');
   btn10.addEventListener('click', function(e) {
     localStorage[pid + '.stry.completed'] = 'T';
-  })
+  });
+
+  // Button 11 (Image Instructions)
+  var btn11 = document.querySelector('#btn-11');
+  btn11.addEventListener('click', function(e) {
+
+    var imgArray = [];
+    for (var i=1; i<=10; i++) {
+      imgArray.push(i);
+    }
+    shuffle(imgArray);
+
+    var qImage = document.querySelector('#qImage');
+    var question = document.querySelector('.question');
+    var imgAnswer = document.querySelector('#imgAnswer');
+    var imgSubmit = document.querySelector('#imgSubmit');
+
+    var startTime;
+
+    function showImage() {
+      qImage.setAttribute('src', IMG_DATA[imgArray[0]-1].imgPath);
+      question.innerHTML = IMG_DATA[imgArray[0]-1].question;
+
+      imgAnswer.value = '';
+
+      startTime = Date.now();
+    }
+
+    function recordImage() {
+      var time = Date.now() - startTime;
+      var trialNum = imgArray.shift()
+
+      localStorage[pid + '.img.' + trialNum + '.question'] = question.innerHTML;
+      localStorage[pid + '.img.' + trialNum + '.answer'] = imgAnswer.value;
+      localStorage[pid + '.img.' + trialNum + '.time'] = time;
+
+      if (imgArray.length == 0) {
+        qImage.style.display = 'none';
+        imgSubmit.style.display = 'none';
+        imgAnswer.style.display = 'none';
+        question.innerHTML = 'Finished!';
+
+        btn12.removeAttribute('disabled');
+      } else {
+        showImage();
+      }
+    }
+
+    imgSubmit.addEventListener('click', recordImage);
+
+    showImage();
+  });
+
+  // Button 12 (Image Task) should be disabled until the test is over.
+  var btn12 = document.querySelector('#btn-12');
+  btn12.addEventListener('click', function(e) {
+    localStorage[pid + '.img.completed'] = 'T';
+  });
+
+  // Button 14 collects the results of the post survey then sends all of the
+  // data to the server
+  var btn14 = document.querySelector('#btn-14');
+  btn14.addEventListener('click', function(e) {
+
+    var easyRadio = document.querySelectorAll('input[name="easyTask"]');
+    for (var i=0; i<easyRadio.length; i++) {
+      if (easyRadio[i].checked) {
+        localStorage[pid + '.post.easy'] = easyRadio[i].value;
+      }
+    }
+
+    var hardRadio = document.querySelectorAll('input[name="hardTask"]');
+    for (var i=0; i<hardRadio.length; i++) {
+      if (hardRadio[i].checked) {
+        localStorage[pid + '.post.hard'] = hardRadio[i].value;
+      }
+    }
+
+    var skillRadio = document.querySelectorAll('input[name="postBelief"]');
+    for (var i=0; i<skillRadio.length; i++) {
+      if (skillRadio[i].checked) {
+        localStorage[pid + '.post.skill'] = skillRadio[i].value;
+      }
+    }
+  });
 
   // Button 15 (Start Over) should clear the participant ID in the header
   var btn15 = document.querySelector('#btn-15');

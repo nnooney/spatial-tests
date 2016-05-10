@@ -55,10 +55,12 @@ ABCDE.bldg.#.time = Time to Complete Task
 ABCDE.stry.completed = T/F
 ABCDE.stry.#.guess.path = <PATH>
 ABCDE.stry.#.actual.path = <PATH>
-ABCDE.stry.#.time = Time to trace Path
+ABCDE.stry.#.readTime = Time to Read Story
+ABCDE.stry.#.drawTime = Time to Trace Path
 
 ABCDE.img.completed = T/F
 ABCDE.img.#.answer = Text
+ABCDE.img.#.question = Text
 ABCDE.img.#.time = Time to choose answer
 
 ABCDE.post.completed = T/F
