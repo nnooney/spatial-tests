@@ -181,6 +181,8 @@ span.ans {
 
 #mapContainer {
   position: relative;
+  max-width: 78vh;
+  max-height: 60vh;
 }
 
 #stryMap {

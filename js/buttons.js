@@ -465,9 +465,34 @@ document.addEventListener('DOMContentLoaded', function(e) {
     var xhr = new XMLHttpRequest();
     var url = 'submit-data.php';
 
-    xhr.open("POST", url, );
-    xhr.send(JSON.stringify(localStorage));
+    xhr.open("POST", url);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      console.log(xhr.responseText);
+    }
 
+    xhr.send('data=' + JSON.stringify(localStorage));
+
+    // Now populate the results page with data
+    var mrtAccuracy = document.querySelector('#mrtAccuracy');
+    var mrtSpeed = document.querySelector('#mrtSpeed');
+    var bldgAccuracy = document.querySelector('#bldgAccuracy');
+    var bldgSpeed = document.querySelector('#bldgSpeed');
+    var stryAccuracy = document.querySelector('#stryAccuracy');
+    var strySpeed = document.querySelector('#strySpeed');
+
+    // Calculate stats for mrt
+    var speed, correct=0;
+    for (var i=1; i<=30; i++) {
+      if (localStorage[pid+'.mrt.'+i+'.guess'] == localStorage[pid+'.mrt.'+i+'.actual']) {
+        correct += 1;
+      }
+      speed += parseInt(localStorage[pid+'.mrt.'+i+'.time']);
+    }
+    console.log(correct, speed);
+
+    mrtAccuracy.innerHTML = correct / 30 * 100;
+    mrtSpeed.innerHTML = speed / 30000;
   });
 
   // Button 15 (Start Over) should clear the participant ID in the header

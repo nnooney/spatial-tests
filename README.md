@@ -35,7 +35,6 @@ ABCDE.pre.course = 0..5
 ABCDE.pre.building = building
 ABCDE.pre.gender = M/F/C
 ABCDE.pre.role.<type> = T/F
-ABCDE.pre.race.<type> = T/F
 
 ABCDE.mrt.completed = T/F
 ABCDE.mrt.order = The order the trials were shown
