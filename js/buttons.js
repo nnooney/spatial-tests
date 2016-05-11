@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   // Button 2 needs to perform a lookup to create a registration
   btn2.addEventListener('click', function(e) {
     // Assemble the participantID
+    pid = '';
     for (var i=0; i<sec2fields.length; i++) {
       pid += sec2fields[i].value;
     }
@@ -95,11 +96,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
     var roles = document.querySelectorAll('input[name="participantCategory"]');
     for (var i=0; i<roles.length; i++) {
       localStorage[pid + '.pre.role.' + roles[i].value] = (roles[i].checked ? 'T' : 'F');
-    }
-
-    var races = document.querySelectorAll('input[name="participantRace"]');
-    for (var i=0; i<races.length; i++) {
-      localStorage[pid + '.pre.race.' + races[i].value] = (races[i].checked ? 'T' : 'F');
     }
   });
 
@@ -464,6 +460,14 @@ document.addEventListener('DOMContentLoaded', function(e) {
         localStorage[pid + '.post.skill'] = skillRadio[i].value;
       }
     }
+
+    // Send an AJAX request to record the data
+    var xhr = new XMLHttpRequest();
+    var url = 'submit-data.php';
+
+    xhr.open("POST", url, );
+    xhr.send(JSON.stringify(localStorage));
+
   });
 
   // Button 15 (Start Over) should clear the participant ID in the header
