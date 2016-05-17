@@ -41,6 +41,16 @@ document.addEventListener('DOMContentLoaded', function(e) {
     });
   }
 
+  // A helper function for changing the active section
+  function changeActiveSection(num) {
+    var sections = document.querySelectorAll('section');
+    for (var i=0; i<sections.length; i++) {
+      sections[i].classList.remove('active');
+    }
+    sections[num-1].classList.add('active');
+  }
+
+
   // Button 2 needs to perform a lookup to create a registration
   btn2.addEventListener('click', function(e) {
     // Assemble the participantID
@@ -52,15 +62,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
     var userID = document.querySelector('#userID');
     userID.innerHTML = "Participant: " + pid;
 
-    // A helper function for changing the active section
-    function changeActiveSection(num) {
-      var sections = document.querySelectorAll('section');
-      for (var i=0; i<sections.length; i++) {
-        sections[i].classList.remove('active');
-      }
-      sections[num-1].classList.add('active');
-    }
-
     // Check to see if this user has already created an account
     if (localStorage[pid + '.pre.completed'] == 'T') {
       // Take them to the most recent uncompleted section
@@ -68,13 +69,12 @@ document.addEventListener('DOMContentLoaded', function(e) {
         changeActiveSection(4);
       } else if (localStorage[pid + '.bldg.completed'] != 'T') {
         changeActiveSection(7);
-      } else if (localStorage[pid + '.stry.completed'] != 'T') {
-        changeActiveSection(9);
       } else if (localStorage[pid + '.img.completed'] != 'T') {
         changeActiveSection(11);
       } else if (localStorage[pid + '.post.completed'] != 'T') {
         changeActiveSection(13);
       } else {
+        calculateStats();
         changeActiveSection(15);
       }
     }
@@ -202,6 +202,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
     var style = window.getComputedStyle(bldgMap);
     ratio = parseInt(style.width) / 700; // 700 is the width of the regular image
 
+    localStorage[pid+'.bldg.ratio'] = ratio;
+
     // Reposition the current building image
     currentBuilding.style.transform = 'scale(' + ratio + ') rotate(' + bldgRot + 'deg)';
     currentBuilding.style.left = (bldgX - parseInt(imgStyle.width)*ratio) + 'px';
@@ -272,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
   var btn8 = document.querySelector('#btn-8');
   btn8.addEventListener('click', function(e) {
     localStorage[pid + '.bldg.completed'] = 'T';
+    changeActiveSection(11);
   })
 
   // Button 9 (Story Info) should begin the story collection process
@@ -467,33 +470,52 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
     xhr.open("POST", url);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-      console.log(xhr.responseText);
-    }
-
     xhr.send('data=' + JSON.stringify(localStorage));
 
+    // Set the Post Survey to True
+    localStorage[pid+'.post.completed'] = 'T';
+    calculateStats();
+  });
+
+  function calculateStats() {
     // Now populate the results page with data
     var mrtAccuracy = document.querySelector('#mrtAccuracy');
     var mrtSpeed = document.querySelector('#mrtSpeed');
     var bldgAccuracy = document.querySelector('#bldgAccuracy');
     var bldgSpeed = document.querySelector('#bldgSpeed');
-    var stryAccuracy = document.querySelector('#stryAccuracy');
-    var strySpeed = document.querySelector('#strySpeed');
 
     // Calculate stats for mrt
-    var speed, correct=0;
+    var speed=0, correct=0;
     for (var i=1; i<=30; i++) {
       if (localStorage[pid+'.mrt.'+i+'.guess'] == localStorage[pid+'.mrt.'+i+'.actual']) {
         correct += 1;
       }
       speed += parseInt(localStorage[pid+'.mrt.'+i+'.time']);
     }
-    console.log(correct, speed);
+    mrtAccuracy.innerHTML = Math.round(correct / 30 * 100);
+    mrtSpeed.innerHTML = Math.round(speed / 30)/1000;
 
-    mrtAccuracy.innerHTML = correct / 30 * 100;
-    mrtSpeed.innerHTML = speed / 30000;
-  });
+    // Calculate stats for bldg
+    var bspeed=0, bcorrect=0;
+    var bratio = parseInt(localStorage[pid+'.bldg.ratio']);
+    for (var i=1; i<=15; i++) {
+      var guessx = parseInt(localStorage[pid+'.bldg.'+i+'.guess.x']);
+      var guessy = parseInt(localStorage[pid+'.bldg.'+i+'.guess.y']);
+      var actx = parseInt(localStorage[pid+'.bldg.'+i+'.actual.x']);
+      var acty = parseInt(localStorage[pid+'.bldg.'+i+'.actual.y']);
+
+      var dist = Math.sqrt(Math.pow(actx-guessx,2)+Math.pow(acty-guessy,2));
+      
+      // For the accuracy, within 20 px is a 100%, and for every 2 px further off
+      // subtract 1 % from the score.
+      dist = dist/2 - 10;
+      bcorrect += Math.max(0,Math.min(100, 100-dist));
+      bspeed += parseInt(localStorage[pid+'.bldg.'+i+'.time']);
+    }
+
+    bldgAccuracy.innerHTML = Math.round(bcorrect / 15);
+    bldgSpeed.innerHTML = Math.round(bspeed / 15)/1000;
+  }
 
   // Button 15 (Start Over) should clear the participant ID in the header
   var btn15 = document.querySelector('#btn-15');
